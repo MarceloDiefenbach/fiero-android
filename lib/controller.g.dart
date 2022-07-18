@@ -72,9 +72,9 @@ mixin _$Controller on ControllerBase, Store {
   @override
   String toString() {
     return '''
-email: ${email},
-password: ${password},
-name: ${name}
+      email: ${email},
+      password: ${password},
+      name: ${name}
     ''';
   }
 }

@@ -55,27 +55,27 @@ class _LoginState extends State<Login> {
     return retorno;
   }
 
-  // @override
-  // void didChangeDependencies() {
-  //   // TODO: implement didChangeDependencies
-  //   super.didChangeDependencies();
-  //   controller = Provider.of<Controller>(context);
-  //   timer = Timer.periodic(Duration(milliseconds: 500), (timer) {
-  //     controller.updateCredentials();
-  //     bool auth = controller.auth;
-  //     controller.verifiyAuth(controller);
-  //     if(auth){
-  //       Navigator.pushReplacement(
-  //         context,
-  //         PageRouteBuilder(
-  //           pageBuilder: (context, animation1, animation2) => Home(),
-  //           transitionDuration: Duration.zero,
-  //           reverseTransitionDuration: Duration.zero,
-  //         ),
-  //       );
-  //     }
-  //   });
-  // }
+  @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    controller = Provider.of<Controller>(context);
+    timer = Timer.periodic(Duration(milliseconds: 500), (timer) {
+      controller.updateCredentials();
+      bool auth = controller.auth;
+      controller.verifiyAuth(controller);
+      if(auth){
+        Navigator.pushReplacement(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => Home(),
+            transitionDuration: Duration.zero,
+            reverseTransitionDuration: Duration.zero,
+          ),
+        );
+      }
+    });
+  }
 
 
   void dispose() {
