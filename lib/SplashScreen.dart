@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:fiero/CreateAccount.dart';
 import 'package:fiero/Home.dart';
+import 'package:fiero/Login.dart';
 import 'package:fiero/controller.dart';
 import 'package:http/http.dart' as http;
 
@@ -33,27 +34,27 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
   }
 
-  doAuth(String email, String password) async {
-
-    Map data = {
-      "email": email,
-      "password": password,
-    };
-
-    var jsonData = jsonEncode(data);
-
-    http.Response response;
-
-    response = await http.post(
-      Uri.parse('http://${getIP()}:3333/user/login'),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonData,
-    );
-
-    Map<dynamic, dynamic> retorno = jsonDecode(response.body);
-    print(retorno);
-    return retorno;
-  }
+  // doAuth(String email, String password) async {
+  //
+  //   Map data = {
+  //     "email": email,
+  //     "password": password,
+  //   };
+  //
+  //   var jsonData = jsonEncode(data);
+  //
+  //   http.Response response;
+  //
+  //   response = await http.post(
+  //     Uri.parse('http://${getIP()}:3333/user/login'),
+  //     headers: {'Content-Type': 'application/json'},
+  //     body: jsonData,
+  //   );
+  //
+  //   Map<dynamic, dynamic> retorno = jsonDecode(response.body);
+  //   print(retorno);
+  //   return retorno;
+  // }
 
   @override
   void didChangeDependencies() {
@@ -69,6 +70,15 @@ class _SplashScreenState extends State<SplashScreen> {
           context,
           PageRouteBuilder(
             pageBuilder: (context, animation1, animation2) => Home(),
+            transitionDuration: Duration.zero,
+            reverseTransitionDuration: Duration.zero,
+          ),
+        );
+      } else {
+        Navigator.pushReplacement(
+          context,
+          PageRouteBuilder(
+            pageBuilder: (context, animation1, animation2) => Login(),
             transitionDuration: Duration.zero,
             reverseTransitionDuration: Duration.zero,
           ),

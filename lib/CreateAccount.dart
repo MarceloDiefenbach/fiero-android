@@ -47,12 +47,11 @@ class _CreateAccountState extends State<CreateAccount> {
     );
 
     Map<dynamic, dynamic> retorno = jsonDecode(response.body);
-    // print(retorno);
-    // print(retorno["message"]);
-    // print(retorno["message"]["id"]);
-    // print(retorno["message"]["name"]);
-    // print(retorno["message"]["email"]);
-    // print(retorno["message"]["password"]);
+    print(retorno);
+    print(retorno["message"]);
+    print(retorno["message"]["id"]);
+    print(retorno["message"]["name"]);
+    print(retorno["message"]["email"]);
   }
 
   @override

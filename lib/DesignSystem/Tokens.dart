@@ -85,5 +85,5 @@ fontSizeLG() {
 }
 
 getIP() {
-  return "192.168.25.93";
+  return "10.41.40.25";
 }

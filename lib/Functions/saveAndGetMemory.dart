@@ -1,10 +1,10 @@
 import 'dart:convert';
+import 'package:fiero/DesignSystem/Tokens.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 final Future<SharedPreferences> prefs = SharedPreferences.getInstance();
 
-String ip = "192.168.25.93";
 
 saveEmail(String data) async {
   final prefs = await SharedPreferences.getInstance();
@@ -45,6 +45,18 @@ getName() async {
   return data;
 }
 
+saveID(String data) async {
+  final prefs = await SharedPreferences.getInstance();
+  prefs.setString("user_id", data);
+}
+
+getID() async {
+  String data;
+  final prefs = await SharedPreferences.getInstance();
+  data = prefs.getString("user_id") ?? "";
+  print(data);
+  return data;
+}
 
 
 doAuth(String email, String password) async {
@@ -57,12 +69,13 @@ doAuth(String email, String password) async {
   var jsonData = jsonEncode(data);
 
   http.Response response;
-
+  print("1");
   response = await http.post(
-    Uri.parse('http://${ip}:3333/user/login'),
+    Uri.parse('http://${getIP()}:3333/user/login'),
     headers: {'Content-Type': 'application/json'},
     body: jsonData,
   );
+  print("2");
 
   Map<dynamic, dynamic> retorno = jsonDecode(response.body);
 
@@ -70,7 +83,6 @@ doAuth(String email, String password) async {
     // print("${retorno["user"]["name"]} aposkdpaksodpaoksdpo");
 
     saveEmail(retorno["user"]["email"]);
-    savePassword(retorno["user"]["password"]);
     saveName(retorno["user"]["name"]);
     return retorno;
   }

@@ -26,7 +26,6 @@ abstract class ControllerBase with Store {
 
   @action
   void doLogin(String email, String password) async {
-
     doAuth(email, password).then((dados) {
 
       if (dados == "erro") {
@@ -35,11 +34,10 @@ abstract class ControllerBase with Store {
         if (dados["token"] != Null) {
 
           saveEmail(dados["user"]["email"]);
-          savePassword(dados["user"]["password"]);
           saveName(dados["user"]["name"]);
 
 
-          // print(dados["user"]["name"]);
+          print(dados["user"]["name"]);
           //success
           auth = true;
           return true;
@@ -47,6 +45,7 @@ abstract class ControllerBase with Store {
         } else {
           //error
           //here we can return the erro type
+          print("erro");
           auth = false;
           return false;
         }
@@ -55,10 +54,8 @@ abstract class ControllerBase with Store {
   }
 
   updateCredentials() async {
-
     email = await getEmail();
     password = await getPassword();
-
   }
 
   @action
@@ -72,11 +69,10 @@ abstract class ControllerBase with Store {
         if (dados["token"] != Null) {
 
           saveEmail(dados["user"]["email"]);
-          savePassword(dados["user"]["password"]);
           saveName(dados["user"]["name"]);
 
 
-          // print(dados["user"]["name"]);
+          print(dados["user"]["name"]);
           //success
           auth = true;
           return true;
@@ -84,6 +80,7 @@ abstract class ControllerBase with Store {
         } else {
           //error
           //here we can return the erro type
+          print("erro");
           auth = false;
           return false;
         }
