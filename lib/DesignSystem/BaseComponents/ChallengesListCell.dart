@@ -29,19 +29,11 @@ class _ChallengesListCellState extends State<ChallengesListCell> {
       ),
       child: Padding(
         padding: EdgeInsets.all(spacingXXXS()),
-        child: Column(
+        child: Stack(
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Text(
-                  "${widget.title}",
-                  style: TextStyle(
-                      color: colorNeutralHighPure(),
-                      fontWeight: FontWeight.bold,
-                      fontSize: fontSizeSM()),
-                  textAlign: TextAlign.left,
-                ),
-                Spacer(),
                 Icon(
                   Icons.arrow_forward_ios,
                   color: colorNeutralHighPure(),
@@ -50,22 +42,43 @@ class _ChallengesListCellState extends State<ChallengesListCell> {
                 ),
               ],
             ),
-            Padding(padding: EdgeInsets.only(top: spacingXXXS())),
-            Row(
+            Column(
               children: [
-                Text(
-                  "Participantes: ${widget.subtitle}",
-                  style: TextStyle(
-                      color: colorNeutralHighPure(),
-                      fontWeight: FontWeight.normal,
-                      fontSize: fontSizeXXS()),
-                  textAlign: TextAlign.left,
+                Row(
+                  children: [
+                    Flexible(
+                      child: Text(
+                        "${widget.title}",
+                        style: TextStyle(
+                            color: colorNeutralHighPure(),
+                            fontWeight: FontWeight.bold,
+                            fontSize: fontSizeSM(),
+                            height: 1),
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                  ],
                 ),
-                Spacer(),
+                Padding(padding: EdgeInsets.only(top: spacingXXXS())),
+                Row(
+                  children: [
+                    Flexible(
+                      child: Text(
+                        "Participantes: ${widget.subtitle}",
+                        style: TextStyle(
+                            color: colorNeutralHighPure(),
+                            fontWeight: FontWeight.normal,
+                            fontSize: fontSizeXXS(),
+                            height: 1),
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                  ],
+                ),
+                Padding(padding: EdgeInsets.only(top: spacingXXXS())),
+                ChallengeType("MD5"),
               ],
             ),
-            Padding(padding: EdgeInsets.only(top: spacingXXXS())),
-            ChallengeType("MD5"),
           ],
         ),
       ),

@@ -34,22 +34,34 @@ class _HomeState extends State<Home> {
               if(index == 0){
                 return Padding(
                   padding: EdgeInsets.fromLTRB(spacingNano(), spacingXXXS(), spacingNano(), spacingXXS()),
-                  child: Row(
+                  child: Stack(
                     children: [
-                      Text(
-                        "Seus desafios",
-                        style: TextStyle(
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Icon(
+                            Icons.add,
                             color: colorNeutralHighPure(),
-                            fontWeight: FontWeight.bold,
-                            fontSize: fontSizeLG()),
-                        textAlign: TextAlign.left,
+                            size: fontSizeLG(),
+                            semanticLabel: 'Icone de criar novo desafio',
+                          ),
+                        ],
                       ),
-                      Spacer(),
-                      Icon(
-                        Icons.add,
-                        color: colorNeutralHighPure(),
-                        size: fontSizeLG(),
-                        semanticLabel: 'Icone de criar novo desafio',
+                      Row(
+                        children: [
+                          Flexible(
+                            child: Text(
+                              "Seus desafios",
+                              style: TextStyle(
+                                  color: colorNeutralHighPure(),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: fontSizeLG(),
+                                  height: 1),
+                              textAlign: TextAlign.left,
+                              maxLines: null,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
