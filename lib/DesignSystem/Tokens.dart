@@ -4,15 +4,15 @@ import 'package:flutter/material.dart';
 //SPACING
 
 //4
-spacingQuarck(double screenHeight) {
+spacingQuarck() {
   return 4.0;
 }
 //8
-spacingNano(double screenHeight) {
+spacingNano() {
   return 8.0;
 }
 //16
-spacingXXXS(double screenHeight) {
+spacingXXXS() {
   return 16.0;
 }
 //20
@@ -20,11 +20,11 @@ spacingGlobalMargin(){
   return 20.0;
 }
 //24
-spacingXXS(double screenHeight) {
+spacingXXS() {
   return 24.0;
 }
 //32
-spacingXS(double screenHeight) {
+spacingXS() {
   return 32.0;
 }
 
@@ -32,6 +32,10 @@ spacingXS(double screenHeight) {
 
 colorBrandPrimary() {
   return Color(0xffFF0044);
+}
+
+colorBrandSecondary() {
+  return Color(0xff336CFF);
 }
 
 colorNeutralHighPure(){
@@ -46,21 +50,29 @@ colorNeutralLowPure(){
   return Color(0xff000000);
 }
 
+colorNeutralLowDark(){
+  return Color(0xff242424);
+}
+
+colorNeutralBackground(){
+  return Color(0xff181818);
+}
+
 //CORNER RADIUS
 borderRadiusNone() {
-  return BorderRadius.circular(0);
+  return BorderRadius.circular(0.0);
 }
 
 borderRadiusSmall() {
-  return BorderRadius.circular(4);
+  return BorderRadius.circular(4.0);
 }
 
 borderRadiusMedium() {
-  return BorderRadius.circular(8);
+  return BorderRadius.circular(8.0);
 }
 
 borderRadiusCircular(){
-  return BorderRadius.circular(500);
+  return BorderRadius.circular(500.0);
 }
 
 //FONT SIZE
@@ -85,5 +97,6 @@ fontSizeLG() {
 }
 
 getIP() {
-  return "10.41.40.25";
+  // return "10.41.40.25";
+  return "192.168.25.93";
 }

@@ -130,7 +130,7 @@ class _LoginState extends State<Login> {
                                 border: Border.all(color: colorNeutralHighPure(), width: 0.5),
                               ),
                               child: Padding(
-                                padding: EdgeInsets.fromLTRB(spacingQuarck(height), spacingXS(height), spacingQuarck(height), spacingXS(height)),
+                                padding: EdgeInsets.fromLTRB(spacingQuarck(), spacingXS(), spacingQuarck(), spacingXS()),
                                 child: Column(
                                   children: [
                                     Text(
@@ -141,7 +141,7 @@ class _LoginState extends State<Login> {
                                           fontSize: 20),
                                       textAlign: TextAlign.center,
                                     ),
-                                    Padding(padding: EdgeInsets.all(spacingNano(height))),
+                                    Padding(padding: EdgeInsets.all(spacingNano())),
                                     Container(
                                       width: width*0.8,
                                       decoration: BoxDecoration(
@@ -150,7 +150,7 @@ class _LoginState extends State<Login> {
                                           border: Border.all(color: colorNeutralHighPure(), width: 1)
                                       ),
                                       child: Padding(
-                                        padding: EdgeInsets.only(left: spacingNano(height), right: spacingNano(height)),
+                                        padding: EdgeInsets.only(left: spacingNano(), right: spacingNano()),
                                         child: TextField(
                                           scrollPadding: EdgeInsets.only(top:100),
                                           controller: _emailController,
@@ -171,7 +171,7 @@ class _LoginState extends State<Login> {
                                         ),
                                       ),
                                     ),
-                                    Padding(padding: EdgeInsets.all(spacingNano(height))),
+                                    Padding(padding: EdgeInsets.all(spacingNano())),
                                     Container(
                                       width: width*0.8,
                                       decoration: BoxDecoration(
@@ -180,7 +180,7 @@ class _LoginState extends State<Login> {
                                           border: Border.all(color: colorNeutralHighPure(), width: 1)
                                       ),
                                       child: Padding(
-                                        padding: EdgeInsets.only(left: spacingNano(height), right: spacingNano(height)),
+                                        padding: EdgeInsets.only(left: spacingNano(), right: spacingNano()),
                                         child: TextField(
                                           obscureText: true,
                                           enableSuggestions: false,
@@ -203,7 +203,7 @@ class _LoginState extends State<Login> {
                                         ),
                                       ),
                                     ),
-                                    Padding(padding: EdgeInsets.all(spacingXXXS(height))),
+                                    Padding(padding: EdgeInsets.all(spacingXXXS())),
                                     Text(
                                       "Esqueci minha senha",
                                       style: TextStyle(
@@ -212,14 +212,14 @@ class _LoginState extends State<Login> {
                                           fontSize: fontSizeXXS()),
                                       textAlign: TextAlign.center,
                                     ),
-                                    Padding(padding: EdgeInsets.all(spacingXXXS(height))),
+                                    Padding(padding: EdgeInsets.all(spacingXXXS())),
                                     GestureDetector(
                                       child: Button("Fazer login", width),
                                       onTap: () {
                                         controller.doLogin(_emailController.text, _passwordController.text);
                                       },
                                     ),
-                                    Padding(padding: EdgeInsets.all(spacingNano(height))),
+                                    Padding(padding: EdgeInsets.all(spacingNano())),
                                     Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
