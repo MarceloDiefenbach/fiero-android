@@ -1,30 +1,23 @@
 import 'package:fiero/DesignSystem/BaseComponents/Button.dart';
 import 'package:fiero/DesignSystem/Tokens.dart';
 import 'package:fiero/QuickChallenge/VictoryParameter.dart';
-import 'package:fiero/controller.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-class ChallengeName extends StatefulWidget {
+class ChallengeTime extends StatefulWidget {
 
   String type;
 
-  ChallengeName(this.type);
+  ChallengeTime(this.type);
 
   @override
-  State<ChallengeName> createState() => _ChallengeNameState();
+  State<ChallengeTime> createState() => _ChallengeTimeState();
 }
 
-class _ChallengeNameState extends State<ChallengeName> {
-
-  late Controller controller;
-  TextEditingController _nameController = TextEditingController(text: '');
-
-
+class _ChallengeTimeState extends State<ChallengeTime> {
   @override
   Widget build(BuildContext context) {
 
-    controller = Provider.of<Controller>(context);
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
@@ -62,7 +55,7 @@ class _ChallengeNameState extends State<ChallengeName> {
                 ),
                 Padding(padding: EdgeInsets.only(top: 30)),
                 Text(
-                  "Nomeie seu desafio",
+                  "Tempo",
                   style: TextStyle(
                       color: colorNeutralHighPure(),
                       fontWeight: FontWeight.bold,
@@ -71,40 +64,44 @@ class _ChallengeNameState extends State<ChallengeName> {
                   textAlign: TextAlign.center,
                   maxLines: null,
                 ),
+                Padding(padding: EdgeInsets.only(top: 20)),
+                Text(
+                  "O desafio encerrará após\no tempo determinado",
+                  style: TextStyle(
+                      color: colorNeutralHighPure(),
+                      fontWeight: FontWeight.normal,
+                      fontSize: fontSizeXS(),
+                      height: 1.2),
+                  textAlign: TextAlign.center,
+                  maxLines: null,
+                ),
               ],
             ),
             Column(
-              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Padding(padding: EdgeInsets.only(top: height*0.3)),
-                Container(
-                  width: width*0.8,
-                  decoration: BoxDecoration(
-                      color: Colors.transparent,
-                      borderRadius: borderRadiusMedium(),
-                      border: Border.all(color: Colors.transparent, width: 1)
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.only(left: spacingNano(), right: spacingNano()),
-                    child: TextField(
-                      scrollPadding: EdgeInsets.only(top:100),
-                      controller: _nameController,
-                      keyboardType: TextInputType.text,
-                      autofocus: true,
-                      onChanged: (String e) {},
-                      textInputAction: TextInputAction.done,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: '',
-                        hintStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w100, color: colorNeutralHighPure()),
+                Padding(padding: EdgeInsets.only(top: height*0.05)),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(top: height*0.3, left: spacingGlobalMargin(), right: spacingGlobalMargin()),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: Container(
+                            color: colorNeutralHighPure(),
+                            child: CupertinoTimerPicker(
+                              backgroundColor: colorNeutralHighPure(),
+                              mode: CupertinoTimerPickerMode.hm,
+                              onTimerDurationChanged: (value) {
+
+                              },
+                            ),
+                          ),
+                        ),
                       ),
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        color: colorNeutralHighPure(),
-                        fontSize: 30,
-                      ),
-                    ),
+                    ],
                   ),
                 ),
               ],
@@ -117,16 +114,14 @@ class _ChallengeNameState extends State<ChallengeName> {
                   padding: EdgeInsets.only(left: spacingXXXS(), right: spacingXXXS()),
                   child: GestureDetector(
                       onTap: () {
-                        if (widget.type == "highest") {
-                          Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder: (context, animation1, animation2) => VictoryParameter(widget.type, _nameController.text),
-                              transitionDuration: Duration.zero,
-                              reverseTransitionDuration: Duration.zero,
-                            ),
-                          );
-                        }
+                        Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                            pageBuilder: (context, animation1, animation2) => VictoryParameter(widget.type, ""),
+                            transitionDuration: Duration.zero,
+                            reverseTransitionDuration: Duration.zero,
+                          ),
+                        );
                       },
                       child: Button("Próximo", width)
                   ),
@@ -147,7 +142,7 @@ class _ChallengeNameState extends State<ChallengeName> {
                     maxLines: null,
                   ),
                 ),
-                Padding(padding: EdgeInsets.only(bottom: 20)),
+                Padding(padding: EdgeInsets.only(bottom: 50)),
               ],
             ),
           ],

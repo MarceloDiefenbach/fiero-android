@@ -1,6 +1,7 @@
 import 'package:fiero/DesignSystem/BaseComponents/Button.dart';
 import 'package:fiero/DesignSystem/Tokens.dart';
 import 'package:fiero/QuickChallenge/ChallengeName.dart';
+import 'package:fiero/QuickChallenge/ChallengeTime.dart';
 import 'package:fiero/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,31 +29,13 @@ class _ChallengeTypeState extends State<ChallengeType> {
     int _index = 0;
 
     return Scaffold(
-      appBar: AppBar(
-        leading: GestureDetector(
-          onTap: () {
-            Navigator.of(context).pop();
-          },
-          child: Icon(
-            Icons.arrow_back_ios,
-            color: colorNeutralHighDark(),
-            size: fontSizeLG(),
-            semanticLabel: 'Icone de criar novo desafio',
-          ),
-        ),
-        // title: Text("",
-        //     style: TextStyle(fontWeight: FontWeight.bold, color: colorNeutralHighPure())),
-        elevation: 0,
-        backgroundColor: colorNeutralBackground(),
-        foregroundColor: colorNeutralBackground(),
-      ),
       body: Container(
         width: width,
         height: height,
         color: colorNeutralBackground(),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(padding: EdgeInsets.only(top: spacingXXS())),
             Text(
               "Escolha um novo\ndesafio rápido",
               style: TextStyle(
@@ -121,16 +104,17 @@ class _ChallengeTypeState extends State<ChallengeType> {
                                         padding: EdgeInsets.only(left: spacingXXXS(), right: spacingXXXS()),
                                         child: GestureDetector(
                                           onTap: () {
-                                            Navigator.push(
-                                              context,
-                                              PageRouteBuilder(
-                                                pageBuilder: (context, animation1, animation2) => ChallengeName(type[i]),
-                                                transitionDuration: Duration.zero,
-                                                reverseTransitionDuration: Duration.zero,
-                                              ),
-                                            );
+
+                                              Navigator.push(
+                                                context,
+                                                PageRouteBuilder(
+                                                  pageBuilder: (context, animation1, animation2) => ChallengeName(type[i]),
+                                                  transitionDuration: Duration.zero,
+                                                  reverseTransitionDuration: Duration.zero,
+                                                ),
+                                              );
                                           },
-                                            child: Button("Escolher esse", width)
+                                          child: Button("Escolher esse", width)
                                         ),
                                       ),
                                     ],
@@ -146,6 +130,23 @@ class _ChallengeTypeState extends State<ChallengeType> {
                 ),
               ),
             ),
+            Padding(padding: EdgeInsets.only(bottom: spacingXS())),
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                "Voltar para lista",
+                style: TextStyle(
+                    color: colorNeutralHighPure(),
+                    fontWeight: FontWeight.normal,
+                    fontSize: fontSizeXS(),
+                    height: 1.2),
+                textAlign: TextAlign.center,
+                maxLines: null,
+              ),
+            ),
+            Padding(padding: EdgeInsets.only(bottom: 20)),
           ],
         ),
       ),

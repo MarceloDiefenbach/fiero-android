@@ -45,6 +45,19 @@ getName() async {
   return data;
 }
 
+saveToken(String data) async {
+  final prefs = await SharedPreferences.getInstance();
+  prefs.setString("token", data);
+}
+
+getToken() async {
+  String data;
+  final prefs = await SharedPreferences.getInstance();
+  data = prefs.getString("token") ?? "";
+  print(data);
+  return data;
+}
+
 saveID(String data) async {
   final prefs = await SharedPreferences.getInstance();
   prefs.setString("user_id", data);

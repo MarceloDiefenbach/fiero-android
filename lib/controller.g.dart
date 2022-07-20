@@ -55,6 +55,36 @@ mixin _$Controller on ControllerBase, Store {
     });
   }
 
+  late final _$authAtom = Atom(name: 'ControllerBase.auth', context: context);
+
+  @override
+  bool get auth {
+    _$authAtom.reportRead();
+    return super.auth;
+  }
+
+  @override
+  set auth(bool value) {
+    _$authAtom.reportWrite(value, super.auth, () {
+      super.auth = value;
+    });
+  }
+
+  late final _$tokenAtom = Atom(name: 'ControllerBase.token', context: context);
+
+  @override
+  String get token {
+    _$tokenAtom.reportRead();
+    return super.token;
+  }
+
+  @override
+  set token(String value) {
+    _$tokenAtom.reportWrite(value, super.token, () {
+      super.token = value;
+    });
+  }
+
   late final _$ControllerBaseActionController =
       ActionController(name: 'ControllerBase', context: context);
 
@@ -70,11 +100,35 @@ mixin _$Controller on ControllerBase, Store {
   }
 
   @override
+  void doLogin(String email, String password) {
+    final _$actionInfo = _$ControllerBaseActionController.startAction(
+        name: 'ControllerBase.doLogin');
+    try {
+      return super.doLogin(email, password);
+    } finally {
+      _$ControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void verifiyAuth(Controller controller) {
+    final _$actionInfo = _$ControllerBaseActionController.startAction(
+        name: 'ControllerBase.verifiyAuth');
+    try {
+      return super.verifiyAuth(controller);
+    } finally {
+      _$ControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
-      email: ${email},
-      password: ${password},
-      name: ${name}
+email: ${email},
+password: ${password},
+name: ${name},
+auth: ${auth},
+token: ${token}
     ''';
   }
 }

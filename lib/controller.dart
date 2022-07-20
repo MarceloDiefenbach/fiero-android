@@ -19,13 +19,16 @@ abstract class ControllerBase with Store {
   @observable
   bool auth = false;
 
+  @observable
+  String token = "";
+
   @action
   void saveUser(String nameP, String emailP, String passwordP) {
     email = emailP;
   }
 
   @action
-  void doLogin(String email, String password) async {
+  void doLogin(String email, String password) {
     doAuth(email, password).then((dados) {
 
       if (dados == "erro") {
@@ -35,9 +38,8 @@ abstract class ControllerBase with Store {
 
           saveEmail(dados["user"]["email"]);
           saveName(dados["user"]["name"]);
+          saveToken(dados["token"]);
 
-
-          print(dados["user"]["name"]);
           //success
           auth = true;
           return true;
@@ -56,10 +58,11 @@ abstract class ControllerBase with Store {
   updateCredentials() async {
     email = await getEmail();
     password = await getPassword();
+    token = await getToken();
   }
 
   @action
-  void verifiyAuth(Controller controller) async {
+  void verifiyAuth(Controller controller) {
 
     doAuth(controller.email, controller.password).then((dados) {
 
@@ -70,8 +73,9 @@ abstract class ControllerBase with Store {
 
           saveEmail(dados["user"]["email"]);
           saveName(dados["user"]["name"]);
-          
-          print(dados["user"]["name"]);
+          saveToken(dados["token"]);
+          token = dados["token"];
+
           //success
           auth = true;
           return true;

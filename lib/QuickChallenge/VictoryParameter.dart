@@ -21,7 +21,7 @@ class VictoryParameter extends StatefulWidget {
 class _VictoryParameterState extends State<VictoryParameter> {
 
   late Controller controller;
-  TextEditingController _nameController = TextEditingController(text: '');
+  TextEditingController _goalController = TextEditingController(text: '');
 
 
   // {
@@ -31,13 +31,13 @@ class _VictoryParameterState extends State<VictoryParameter> {
   // "goalMeasure": "rounds"
   // }
 
-  createQuickChallenge() async {
+  createQuickChallenge(String name, String type, String goal, String goalMeasure) async {
 
     Map data = {
-      "name": widget.name,
-      "type": widget.type,
-      "goal": 100,
-      "goalMeasure": "unity"
+      "name": name,
+      "type": type,
+      "goal": goal,
+      "goalMeasure": goalMeasure
     };
 
     var jsonData = jsonEncode(data);
@@ -48,7 +48,7 @@ class _VictoryParameterState extends State<VictoryParameter> {
       Uri.parse('http://${getIP()}:3333/quickChallenge/create'),
       headers: {
         'Content-Type': 'application/json',
-        'authToken': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFmY2EzZDZmLTU0NjYtNDFiOS1iYTM4LWE2MTQ3NjhmMjIyYyIsImlhdCI6MTY1ODI4MzIyOSwiZXhwIjoxNjU4Mjg1MDI5fQ.cVQ6uIDZvcDiYP4A2a2wn_7BTbnGlK5utSFgiLCI-Qk'
+        'authToken': '${controller.token}'
       },
       body: jsonData,
     );
@@ -70,24 +70,6 @@ class _VictoryParameterState extends State<VictoryParameter> {
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: AppBar(
-        leading: GestureDetector(
-          onTap: () {
-            Navigator.of(context).pop();
-          },
-          child: Icon(
-            Icons.arrow_back_ios,
-            color: colorNeutralHighDark(),
-            size: fontSizeLG(),
-            semanticLabel: 'Icone de criar novo desafio',
-          ),
-        ),
-        // title: Text("",
-        //     style: TextStyle(fontWeight: FontWeight.bold, color: colorNeutralHighPure())),
-        elevation: 0,
-        backgroundColor: colorNeutralBackground(),
-        foregroundColor: colorNeutralBackground(),
-      ),
       body: Container(
         width: width,
         height: height,
@@ -97,7 +79,7 @@ class _VictoryParameterState extends State<VictoryParameter> {
           children: [
             Column(
               children: [
-                Padding(padding: EdgeInsets.only(top: 50)),
+                Padding(padding: EdgeInsets.only(top: height*0.09)),
                 Stack(
                   alignment: Alignment.topLeft,
                   children: [
@@ -158,7 +140,7 @@ class _VictoryParameterState extends State<VictoryParameter> {
                     padding: EdgeInsets.only(left: spacingNano(), right: spacingNano()),
                     child: TextField(
                       scrollPadding: EdgeInsets.only(top:100),
-                      controller: _nameController,
+                      controller: _goalController,
                       keyboardType: TextInputType.number,
                       autofocus: true,
                       onChanged: (String e) {},
@@ -189,7 +171,7 @@ class _VictoryParameterState extends State<VictoryParameter> {
                       onTap: () {
                         //CREATE CHALLENGE
 
-                        createQuickChallenge().then((dados) {
+                        createQuickChallenge(widget.name, widget.type, _goalController.text, "minutes").then((dados) {
                           print(dados);
                         });
 
@@ -203,6 +185,22 @@ class _VictoryParameterState extends State<VictoryParameter> {
                         // );
                       },
                       child: Button("Próximo", width)
+                  ),
+                ),
+                Padding(padding: EdgeInsets.only(bottom: 20)),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text(
+                    "Voltar",
+                    style: TextStyle(
+                        color: colorNeutralHighPure(),
+                        fontWeight: FontWeight.normal,
+                        fontSize: fontSizeXS(),
+                        height: 1.2),
+                    textAlign: TextAlign.center,
+                    maxLines: null,
                   ),
                 ),
                 Padding(padding: EdgeInsets.only(bottom: 20)),

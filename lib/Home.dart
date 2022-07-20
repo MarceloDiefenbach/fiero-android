@@ -1,3 +1,4 @@
+import 'package:fiero/Functions/saveAndGetMemory.dart';
 import 'package:fiero/QuickChallenge/Challenge%20Type.dart';
 import 'package:fiero/DesignSystem/BaseComponents/ChallengeTypeComponent.dart';
 import 'package:fiero/DesignSystem/BaseComponents/ChallengesListCell.dart';
@@ -19,9 +20,15 @@ class _HomeState extends State<Home> {
   List items = ["1","2","3"];
 
   @override
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+    controller = Provider.of<Controller>(context);
+  }
+
+  @override
   Widget build(BuildContext context) {
 
-    controller = Provider.of<Controller>(context);
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
