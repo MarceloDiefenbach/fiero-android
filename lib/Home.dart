@@ -1,3 +1,5 @@
+import 'package:fiero/QuickChallenge/Challenge%20Type.dart';
+import 'package:fiero/DesignSystem/BaseComponents/ChallengeTypeComponent.dart';
 import 'package:fiero/DesignSystem/BaseComponents/ChallengesListCell.dart';
 import 'package:fiero/DesignSystem/Tokens.dart';
 import 'package:fiero/controller.dart';
@@ -39,11 +41,23 @@ class _HomeState extends State<Home> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Icon(
-                            Icons.add,
-                            color: colorNeutralHighPure(),
-                            size: fontSizeLG(),
-                            semanticLabel: 'Icone de criar novo desafio',
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                PageRouteBuilder(
+                                  pageBuilder: (context, animation1, animation2) => ChallengeType(),
+                                  // transitionDuration: Duration.zero,
+                                  // reverseTransitionDuration: Duration.zero,
+                                ),
+                              );
+                            },
+                            child: Icon(
+                              Icons.add,
+                              color: colorNeutralHighPure(),
+                              size: fontSizeLG(),
+                              semanticLabel: 'Icone de criar novo desafio',
+                            ),
                           ),
                         ],
                       ),

@@ -2,17 +2,17 @@ import 'package:fiero/DesignSystem/Tokens.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ChallengeType extends StatefulWidget {
+class ChallengeTypeComponent extends StatefulWidget {
 
   String type;
 
-  ChallengeType(this.type);
+  ChallengeTypeComponent(this.type);
 
   @override
-  State<ChallengeType> createState() => _ChallengeTypeState();
+  State<ChallengeTypeComponent> createState() => _ChallengeTypeComponentState();
 }
 
-class _ChallengeTypeState extends State<ChallengeType> {
+class _ChallengeTypeComponentState extends State<ChallengeTypeComponent> {
   @override
   Widget build(BuildContext context) {
 

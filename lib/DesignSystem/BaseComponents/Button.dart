@@ -16,7 +16,7 @@ class _ButtonState extends State<Button> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: widget.screenWidth*0.8,
+      width: double.infinity,
       decoration: BoxDecoration(
         color: colorNeutralHighPure(),
         borderRadius: BorderRadius.circular(10),

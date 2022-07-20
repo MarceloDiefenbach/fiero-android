@@ -201,11 +201,14 @@ class _CreateAccountState extends State<CreateAccount> {
                                       ),
                                     ),
                                     Padding(padding: EdgeInsets.all(spacingXXS())),
-                                    GestureDetector(
-                                      child: Button("Criar conta", width),
-                                      onTap: () {
-                                        sendRequest(_nameController.text, _emailController.text, _passwordController.text);
-                                      },
+                                    Padding(
+                                      padding: EdgeInsets.only(left: spacingXXXS(), right: spacingXXXS()),
+                                      child: GestureDetector(
+                                        child: Button("Criar conta", width),
+                                        onTap: () {
+                                          sendRequest(_nameController.text, _emailController.text, _passwordController.text);
+                                        },
+                                      ),
                                     ),
                                     Padding(padding: EdgeInsets.all(spacingNano())),
                                     Row(

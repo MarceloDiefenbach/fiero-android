@@ -70,8 +70,7 @@ abstract class ControllerBase with Store {
 
           saveEmail(dados["user"]["email"]);
           saveName(dados["user"]["name"]);
-
-
+          
           print(dados["user"]["name"]);
           //success
           auth = true;

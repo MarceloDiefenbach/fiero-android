@@ -1,4 +1,4 @@
-import 'package:fiero/DesignSystem/BaseComponents/ChallengeType.dart';
+import 'package:fiero/DesignSystem/BaseComponents/ChallengeTypeComponent.dart';
 import 'package:fiero/DesignSystem/Tokens.dart';
 import 'package:flutter/material.dart';
 
@@ -76,7 +76,7 @@ class _ChallengesListCellState extends State<ChallengesListCell> {
                   ],
                 ),
                 Padding(padding: EdgeInsets.only(top: spacingXXXS())),
-                ChallengeType("MD5"),
+                ChallengeTypeComponent("MD5"),
               ],
             ),
           ],

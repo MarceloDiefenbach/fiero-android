@@ -213,11 +213,14 @@ class _LoginState extends State<Login> {
                                       textAlign: TextAlign.center,
                                     ),
                                     Padding(padding: EdgeInsets.all(spacingXXXS())),
-                                    GestureDetector(
-                                      child: Button("Fazer login", width),
-                                      onTap: () {
-                                        controller.doLogin(_emailController.text, _passwordController.text);
-                                      },
+                                    Padding(
+                                      padding: EdgeInsets.only(left: spacingXXXS(), right: spacingXXXS()),
+                                      child: GestureDetector(
+                                        child: Button("Fazer login", width),
+                                        onTap: () {
+                                          controller.doLogin(_emailController.text, _passwordController.text);
+                                        },
+                                      ),
                                     ),
                                     Padding(padding: EdgeInsets.all(spacingNano())),
                                     Row(
