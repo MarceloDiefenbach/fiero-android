@@ -1,5 +1,8 @@
 import 'package:fiero/DesignSystem/BaseComponents/Button.dart';
 import 'package:fiero/DesignSystem/Tokens.dart';
+import 'package:fiero/QuickChallenge/ChallengeBestOfType.dart';
+import 'package:fiero/QuickChallenge/ChallengeTime.dart';
+import 'package:fiero/QuickChallenge/ChallengeTimeType.dart';
 import 'package:fiero/QuickChallenge/VictoryParameter.dart';
 import 'package:fiero/controller.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +31,29 @@ class _ChallengeNameState extends State<ChallengeName> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
+    Color primary;
+    Color secondary;
+
+    returnPrimary() {
+      if (widget.type == "highest") {
+        return Color(0xff5852DA);
+      } else if (widget.type == "quickest") {
+        return Color(0xffFF5968);
+      } else if (widget.type == "bestof") {
+        return Color(0xff2C28E3);
+      }
+    }
+
+    returnSecondary() {
+      if (widget.type == "highest") {
+        return Color(0xffFFB800);
+      } else if (widget.type == "quickest") {
+        return Color(0xff409C85);
+      } else if (widget.type == "bestof") {
+        return Color(0xff47C18E);
+      }
+    }
+
     return Scaffold(
       body: Container(
         width: width,
@@ -36,42 +62,43 @@ class _ChallengeNameState extends State<ChallengeName> {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            Column(
-              children: [
-                Padding(padding: EdgeInsets.only(top: height*0.09)),
-                Stack(
-                  alignment: Alignment.topLeft,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(500),
-                      child: Container(
-                        width: width*0.8,
-                        height: 10,
-                        color: colorBrandSecondary(),
+            SafeArea(
+              child: Column(
+                children: [
+                  Stack(
+                    alignment: Alignment.topLeft,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(500),
+                        child: Container(
+                          width: width*0.8,
+                          height: 10,
+                          color: returnPrimary(),
+                        ),
                       ),
-                    ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(500),
-                      child: Container(
-                        width: width*0.30,
-                        height: 10,
-                        color: colorBrandPrimary(),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(500),
+                        child: Container(
+                          width: width*0.30,
+                          height: 10,
+                          color: returnSecondary(),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Padding(padding: EdgeInsets.only(top: 30)),
-                Text(
-                  "Nomeie seu desafio",
-                  style: TextStyle(
-                      color: colorNeutralHighPure(),
-                      fontWeight: FontWeight.bold,
-                      fontSize: fontSizeLG(),
-                      height: 1),
-                  textAlign: TextAlign.center,
-                  maxLines: null,
-                ),
-              ],
+                    ],
+                  ),
+                  Padding(padding: EdgeInsets.only(top: 30)),
+                  Text(
+                    "Nomeie seu desafio",
+                    style: TextStyle(
+                        color: colorNeutralHighPure(),
+                        fontWeight: FontWeight.bold,
+                        fontSize: fontSizeLG(),
+                        height: 1),
+                    textAlign: TextAlign.center,
+                    maxLines: null,
+                  ),
+                ],
+              ),
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -91,6 +118,7 @@ class _ChallengeNameState extends State<ChallengeName> {
                       controller: _nameController,
                       keyboardType: TextInputType.text,
                       autofocus: true,
+                      maxLines: null,
                       onChanged: (String e) {},
                       textInputAction: TextInputAction.done,
                       decoration: InputDecoration(
@@ -109,46 +137,65 @@ class _ChallengeNameState extends State<ChallengeName> {
                 ),
               ],
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Spacer(),
-                Padding(
-                  padding: EdgeInsets.only(left: spacingXXXS(), right: spacingXXXS()),
-                  child: GestureDetector(
-                      onTap: () {
-                        if (widget.type == "highest") {
-                          Navigator.push(
-                            context,
-                            PageRouteBuilder(
-                              pageBuilder: (context, animation1, animation2) => VictoryParameter(widget.type, _nameController.text),
-                              transitionDuration: Duration.zero,
-                              reverseTransitionDuration: Duration.zero,
-                            ),
-                          );
-                        }
-                      },
-                      child: Button("Próximo", width)
+            SafeArea(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Spacer(),
+                  Padding(
+                    padding: EdgeInsets.only(left: spacingXXXS(), right: spacingXXXS()),
+                    child: GestureDetector(
+                        onTap: () {
+                          if (widget.type == "highest") {
+                            Navigator.push(
+                              context,
+                              PageRouteBuilder(
+                                pageBuilder: (context, animation1, animation2) => VictoryParameter(widget.type, _nameController.text),
+                                transitionDuration: Duration.zero,
+                                reverseTransitionDuration: Duration.zero,
+                              ),
+                            );
+                          } else if (widget.type == "quickest"){
+                            Navigator.push(
+                              context,
+                              PageRouteBuilder(
+                                pageBuilder: (context, animation1, animation2) => ChallengeTimeType(widget.type, _nameController.text),
+                                transitionDuration: Duration.zero,
+                                reverseTransitionDuration: Duration.zero,
+                              ),
+                            );
+                          }  else if (widget.type == "bestof"){
+                            Navigator.push(
+                              context,
+                              PageRouteBuilder(
+                                pageBuilder: (context, animation1, animation2) => ChallengeBestOfType(widget.type, _nameController.text),
+                                transitionDuration: Duration.zero,
+                                reverseTransitionDuration: Duration.zero,
+                              ),
+                            );
+                          }
+                        },
+                        child: Button("Próximo", width)
+                    ),
                   ),
-                ),
-                Padding(padding: EdgeInsets.only(bottom: 20)),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text(
-                    "Voltar",
-                    style: TextStyle(
-                        color: colorNeutralHighPure(),
-                        fontWeight: FontWeight.normal,
-                        fontSize: fontSizeXS(),
-                        height: 1.2),
-                    textAlign: TextAlign.center,
-                    maxLines: null,
+                  Padding(padding: EdgeInsets.only(bottom: 20)),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text(
+                      "Voltar",
+                      style: TextStyle(
+                          color: colorNeutralHighPure(),
+                          fontWeight: FontWeight.normal,
+                          fontSize: fontSizeXS(),
+                          height: 1.2),
+                      textAlign: TextAlign.center,
+                      maxLines: null,
+                    ),
                   ),
-                ),
-                Padding(padding: EdgeInsets.only(bottom: 20)),
-              ],
+                ],
+              ),
             ),
           ],
         ),

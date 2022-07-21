@@ -1,3 +1,4 @@
+import 'package:fiero/DesignSystem/BaseComponents/RoundIndicator.dart';
 import 'package:fiero/DesignSystem/Tokens.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,26 +20,13 @@ class _ChallengeTypeComponentState extends State<ChallengeTypeComponent> {
     if(widget.type == "MD3") {
       return Row(
         children: [
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: colorBrandPrimary(),
-              borderRadius: BorderRadius.circular(500),
-            ),
-            child: Icon(
-              Icons.check,
-              color: colorNeutralHighPure(),
-              size: fontSizeSM(),
-              semanticLabel: 'Text to announce in accessibility modes',
-            ),
-          ),
+          RoundIndicator("win"),
           Padding(padding: EdgeInsets.only(right: spacingNano())),
           Container(
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              color: colorBrandSecondary(),
+              color: colorHighlight1(),
               borderRadius: BorderRadius.circular(500),
             ),
             child: Icon(
@@ -68,80 +56,15 @@ class _ChallengeTypeComponentState extends State<ChallengeTypeComponent> {
     } else if(widget.type == "MD5") {
       return Row(
         children: [
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: colorBrandPrimary(),
-              borderRadius: BorderRadius.circular(500),
-            ),
-            child: Icon(
-              Icons.check,
-              color: colorNeutralHighPure(),
-              size: fontSizeSM(),
-              semanticLabel: 'Text to announce in accessibility modes',
-            ),
-          ),
+          RoundIndicator("win"),
           Padding(padding: EdgeInsets.only(right: spacingNano())),
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: colorBrandSecondary(),
-              borderRadius: BorderRadius.circular(500),
-            ),
-            child: Icon(
-              Icons.check,
-              color: colorNeutralHighPure(),
-              size: fontSizeSM(),
-              semanticLabel: 'Text to announce in accessibility modes',
-            ),
-          ),
+          RoundIndicator("win"),
           Padding(padding: EdgeInsets.only(right: spacingNano())),
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: colorNeutralHighDark(),
-              borderRadius: BorderRadius.circular(500),
-            ),
-            child: Icon(
-              Icons.remove,
-              color: colorNeutralLowPure(),
-              size: fontSizeSM(),
-              semanticLabel: 'Text to announce in accessibility modes',
-            ),
-          ),
+          RoundIndicator("loose"),
           Padding(padding: EdgeInsets.only(right: spacingNano())),
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: colorNeutralHighDark(),
-              borderRadius: BorderRadius.circular(500),
-            ),
-            child: Icon(
-              Icons.remove,
-              color: colorNeutralLowPure(),
-              size: fontSizeSM(),
-              semanticLabel: 'Text to announce in accessibility modes',
-            ),
-          ),
+          RoundIndicator("default"),
           Padding(padding: EdgeInsets.only(right: spacingNano())),
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: colorNeutralHighDark(),
-              borderRadius: BorderRadius.circular(500),
-            ),
-            child: Icon(
-              Icons.remove,
-              color: colorNeutralLowPure(),
-              size: fontSizeSM(),
-              semanticLabel: 'Text to announce in accessibility modes',
-            ),
-          )
+          RoundIndicator("default"),
         ],
       );
     } else if(widget.type == "Quantity") {

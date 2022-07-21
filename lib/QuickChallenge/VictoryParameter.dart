@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:fiero/DesignSystem/BaseComponents/Button.dart';
 import 'package:fiero/DesignSystem/Tokens.dart';
+import 'package:fiero/QuickChallenge/ChallengeCreated.dart';
 import 'package:http/http.dart' as http;
 import 'package:fiero/controller.dart';
 import 'package:flutter/material.dart';
@@ -22,14 +23,6 @@ class _VictoryParameterState extends State<VictoryParameter> {
 
   late Controller controller;
   TextEditingController _goalController = TextEditingController(text: '');
-
-
-  // {
-  // "name": "primeriasdasdo de muitos",
-  // "type": "bestof",
-  // "goal": 3,
-  // "goalMeasure": "rounds"
-  // }
 
   createQuickChallenge(String name, String type, String goal, String goalMeasure) async {
 
@@ -58,7 +51,7 @@ class _VictoryParameterState extends State<VictoryParameter> {
 
       return response;
     }
-    return response.body;
+    return response.statusCode;
   }
 
 
@@ -69,6 +62,26 @@ class _VictoryParameterState extends State<VictoryParameter> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
 
+    returnPrimary() {
+      if (widget.type == "highest") {
+        return Color(0xff5852DA);
+      } else if (widget.type == "quickest") {
+        return Color(0xffFF5968);
+      } else if (widget.type == "bestof") {
+        return Color(0xff2C28E3);
+      }
+    }
+
+    returnSecondary() {
+      if (widget.type == "highest") {
+        return Color(0xffFFB800);
+      } else if (widget.type == "quickest") {
+        return Color(0xff409C85);
+      } else if (widget.type == "bestof") {
+        return Color(0xff47C18E);
+      }
+    }
+
     return Scaffold(
       body: Container(
         width: width,
@@ -77,53 +90,54 @@ class _VictoryParameterState extends State<VictoryParameter> {
         child: Stack(
           alignment: Alignment.center,
           children: [
-            Column(
-              children: [
-                Padding(padding: EdgeInsets.only(top: height*0.09)),
-                Stack(
-                  alignment: Alignment.topLeft,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(500),
-                      child: Container(
-                        width: width*0.8,
-                        height: 10,
-                        color: colorBrandSecondary(),
+            SafeArea(
+              child: Column(
+                children: [
+                  Stack(
+                    alignment: Alignment.topLeft,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(500),
+                        child: Container(
+                          width: width*0.8,
+                          height: 10,
+                          color: returnPrimary(),
+                        ),
                       ),
-                    ),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(500),
-                      child: Container(
-                        width: width*0.60,
-                        height: 10,
-                        color: colorBrandPrimary(),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(500),
+                        child: Container(
+                          width: width*0.60,
+                          height: 10,
+                          color: returnSecondary(),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                Padding(padding: EdgeInsets.only(top: 30)),
-                Text(
-                  "Vitória",
-                  style: TextStyle(
-                      color: colorNeutralHighPure(),
-                      fontWeight: FontWeight.bold,
-                      fontSize: fontSizeLG(),
-                      height: 1),
-                  textAlign: TextAlign.center,
-                  maxLines: null,
-                ),
-                Padding(padding: EdgeInsets.only(top: 20)),
-                Text(
-                  "Número de pontos necessários pra\nque alguém seja vencedor.",
-                  style: TextStyle(
-                      color: colorNeutralHighPure(),
-                      fontWeight: FontWeight.normal,
-                      fontSize: fontSizeXS(),
-                      height: 1),
-                  textAlign: TextAlign.center,
-                  maxLines: null,
-                ),
-              ],
+                    ],
+                  ),
+                  Padding(padding: EdgeInsets.only(top: 30)),
+                  Text(
+                    "Vitória",
+                    style: TextStyle(
+                        color: colorNeutralHighPure(),
+                        fontWeight: FontWeight.bold,
+                        fontSize: fontSizeLG(),
+                        height: 1),
+                    textAlign: TextAlign.center,
+                    maxLines: null,
+                  ),
+                  Padding(padding: EdgeInsets.only(top: 20)),
+                  Text(
+                    "Número de pontos necessários pra\nque alguém seja vencedor.",
+                    style: TextStyle(
+                        color: colorNeutralHighPure(),
+                        fontWeight: FontWeight.normal,
+                        fontSize: fontSizeXS(),
+                        height: 1),
+                    textAlign: TextAlign.center,
+                    maxLines: null,
+                  ),
+                ],
+              ),
             ),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -161,50 +175,52 @@ class _VictoryParameterState extends State<VictoryParameter> {
                 ),
               ],
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Spacer(),
-                Padding(
-                  padding: EdgeInsets.only(left: spacingXXXS(), right: spacingXXXS()),
-                  child: GestureDetector(
-                      onTap: () {
-                        //CREATE CHALLENGE
+            SafeArea(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Spacer(),
+                  Padding(
+                    padding: EdgeInsets.only(left: spacingXXXS(), right: spacingXXXS()),
+                    child: GestureDetector(
+                        onTap: () {
+                          //CREATE CHALLENGE
 
-                        createQuickChallenge(widget.name, widget.type, _goalController.text, "minutes").then((dados) {
-                          print(dados);
-                        });
-
-                        // Navigator.pushReplacement(
-                        //   context,
-                        //   PageRouteBuilder(
-                        //     pageBuilder: (context, animation1, animation2) => Home(),
-                        //     transitionDuration: Duration.zero,
-                        //     reverseTransitionDuration: Duration.zero,
-                        //   ),
-                        // );
-                      },
-                      child: Button("Próximo", width)
+                          createQuickChallenge(widget.name, widget.type, _goalController.text, "minutes").then((dados) {
+                            print(dados);
+                            if (dados == 201){
+                              Navigator.pushReplacement(
+                                context,
+                                PageRouteBuilder(
+                                  pageBuilder: (context, animation1, animation2) => ChallengeCreated(widget.type),
+                                  transitionDuration: Duration.zero,
+                                  reverseTransitionDuration: Duration.zero,
+                                ),
+                              );
+                            }
+                          });
+                        },
+                        child: Button("Próximo", width)
+                    ),
                   ),
-                ),
-                Padding(padding: EdgeInsets.only(bottom: 20)),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text(
-                    "Voltar",
-                    style: TextStyle(
-                        color: colorNeutralHighPure(),
-                        fontWeight: FontWeight.normal,
-                        fontSize: fontSizeXS(),
-                        height: 1.2),
-                    textAlign: TextAlign.center,
-                    maxLines: null,
+                  Padding(padding: EdgeInsets.only(bottom: 20)),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text(
+                      "Voltar",
+                      style: TextStyle(
+                          color: colorNeutralHighPure(),
+                          fontWeight: FontWeight.normal,
+                          fontSize: fontSizeXS(),
+                          height: 1.2),
+                      textAlign: TextAlign.center,
+                      maxLines: null,
+                    ),
                   ),
-                ),
-                Padding(padding: EdgeInsets.only(bottom: 20)),
-              ],
+                ],
+              ),
             ),
           ],
         ),

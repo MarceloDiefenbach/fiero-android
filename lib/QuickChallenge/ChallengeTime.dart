@@ -7,8 +7,9 @@ import 'package:flutter/material.dart';
 class ChallengeTime extends StatefulWidget {
 
   String type;
+  String name;
 
-  ChallengeTime(this.type);
+  ChallengeTime(this.type, this.name);
 
   @override
   State<ChallengeTime> createState() => _ChallengeTimeState();
@@ -20,6 +21,26 @@ class _ChallengeTimeState extends State<ChallengeTime> {
 
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+
+    returnPrimary() {
+      if (widget.type == "highest") {
+        return Color(0xff5852DA);
+      } else if (widget.type == "quickest") {
+        return Color(0xffFF5968);
+      } else if (widget.type == "bestof") {
+        return Color(0xff2C28E3);
+      }
+    }
+
+    returnSecondary() {
+      if (widget.type == "highest") {
+        return Color(0xffFFB800);
+      } else if (widget.type == "quickest") {
+        return Color(0xff409C85);
+      } else if (widget.type == "bestof") {
+        return Color(0xff47C18E);
+      }
+    }
 
     return Scaffold(
       body: Container(
@@ -40,7 +61,7 @@ class _ChallengeTimeState extends State<ChallengeTime> {
                       child: Container(
                         width: width*0.8,
                         height: 10,
-                        color: colorBrandSecondary(),
+                        color: returnPrimary(),
                       ),
                     ),
                     ClipRRect(
@@ -48,7 +69,7 @@ class _ChallengeTimeState extends State<ChallengeTime> {
                       child: Container(
                         width: width*0.30,
                         height: 10,
-                        color: colorBrandPrimary(),
+                        color: returnSecondary(),
                       ),
                     ),
                   ],
@@ -93,9 +114,9 @@ class _ChallengeTimeState extends State<ChallengeTime> {
                             color: colorNeutralHighPure(),
                             child: CupertinoTimerPicker(
                               backgroundColor: colorNeutralHighPure(),
-                              mode: CupertinoTimerPickerMode.hm,
+                              mode: CupertinoTimerPickerMode.ms,
                               onTimerDurationChanged: (value) {
-
+                                print(value.inSeconds);
                               },
                             ),
                           ),

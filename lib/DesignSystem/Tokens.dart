@@ -58,6 +58,26 @@ colorNeutralBackground(){
   return Color(0xff181818);
 }
 
+colorHighlight1(){
+  return Color(0xff5852DA);
+}
+
+colorHighlight2(){
+  return Color(0xffFFB800);
+}
+colorHighlight3(){
+  return Color(0xffFF5968);
+}
+colorHighlight4(){
+  return Color(0xff409C85);
+}
+colorHighlight5(){
+  return Color(0xff2C28E3);
+}
+colorHighlight6(){
+  return Color(0xff47C18E);
+}
+
 //CORNER RADIUS
 borderRadiusNone() {
   return BorderRadius.circular(0.0);
@@ -97,6 +117,6 @@ fontSizeLG() {
 }
 
 getIP() {
-  return "10.41.40.25";
-  // return "192.168.25.93";
+  // return "10.41.40.25";
+  return "192.168.25.93";
 }
