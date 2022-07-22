@@ -1,11 +1,13 @@
-import 'package:fiero/Functions/saveAndGetMemory.dart';
+import 'dart:convert';
+
+import 'package:fiero/Classes/QuickChallenge.dart';
 import 'package:fiero/QuickChallenge/Challenge%20Type.dart';
-import 'package:fiero/DesignSystem/BaseComponents/ChallengeTypeComponent.dart';
 import 'package:fiero/DesignSystem/BaseComponents/ChallengesListCell.dart';
 import 'package:fiero/DesignSystem/Tokens.dart';
 import 'package:fiero/controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -18,12 +20,51 @@ class _HomeState extends State<Home> {
 
   late Controller controller;
   List items = ["1","2","3"];
+  late List<QuickChallenge> challenges = [];
 
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     controller = Provider.of<Controller>(context);
+  }
+
+  getChallenges() async {
+
+    print("entrou");
+
+    http.Response response;
+
+    response = await http.get(
+      Uri.parse('http://${getIP()}:3333/quickChallenge/createdByMe'),
+      headers: {
+        'authToken': '${controller.token}'
+      },
+    );
+
+    Map<dynamic, dynamic> retorno = jsonDecode(response.body);
+
+    print(retorno.length);
+
+    for (int i = 0; i < retorno.length; i++) {
+      challenges.add(QuickChallenge(retorno["quickChallenges"][0]["name"]));
+    }
+    print(challenges);
+
+    if(response.statusCode.toString() == "200" ) {
+      return response;
+    }
+    // print(response.body);
+    return challenges;
+  }
+
+  @override
+  void didUpdateWidget(covariant Home oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+    getChallenges().then((dados) {
+      print(dados[0]);
+    });
   }
 
   @override
@@ -38,7 +79,7 @@ class _HomeState extends State<Home> {
         child: Padding(
           padding: EdgeInsets.all(spacingNano()),
           child: ListView.builder(
-            itemCount: items.length+1,
+            itemCount: controller.quickChallenge.length+3,
             itemBuilder: (context, index) {
               if(index == 0){
                 return Padding(

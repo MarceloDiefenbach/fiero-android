@@ -34,28 +34,6 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
   }
 
-  // doAuth(String email, String password) async {
-  //
-  //   Map data = {
-  //     "email": email,
-  //     "password": password,
-  //   };
-  //
-  //   var jsonData = jsonEncode(data);
-  //
-  //   http.Response response;
-  //
-  //   response = await http.post(
-  //     Uri.parse('http://${getIP()}:3333/user/login'),
-  //     headers: {'Content-Type': 'application/json'},
-  //     body: jsonData,
-  //   );
-  //
-  //   Map<dynamic, dynamic> retorno = jsonDecode(response.body);
-  //   print(retorno);
-  //   return retorno;
-  // }
-
   @override
   void didChangeDependencies() {
     // TODO: implement didChangeDependencies

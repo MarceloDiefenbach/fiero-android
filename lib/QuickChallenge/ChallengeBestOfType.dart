@@ -2,11 +2,12 @@ import 'dart:convert';
 
 import 'package:fiero/DesignSystem/Tokens.dart';
 import 'package:fiero/QuickChallenge/ChallengeCreated.dart';
-import 'package:fiero/controller.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:fiero/controller.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
+
 
 class ChallengeBestOfType extends StatefulWidget {
 
@@ -79,6 +80,7 @@ class _ChallengeBestOfTypeState extends State<ChallengeBestOfType> {
         return Color(0xff47C18E);
       }
     }
+
     return Scaffold(
       body: Container(
         width: width,

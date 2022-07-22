@@ -1,3 +1,4 @@
+import 'package:fiero/Classes/QuickChallenge.dart';
 import 'package:fiero/Functions/saveAndGetMemory.dart';
 import 'package:mobx/mobx.dart';
 
@@ -21,6 +22,14 @@ abstract class ControllerBase with Store {
 
   @observable
   String token = "";
+
+  @observable
+  List<QuickChallenge> quickChallenge = [];
+
+  @action
+  addChallenge(QuickChallenge challenge){
+    quickChallenge.add(challenge);
+  }
 
   @action
   void saveUser(String nameP, String emailP, String passwordP) {

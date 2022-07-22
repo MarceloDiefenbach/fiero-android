@@ -117,6 +117,5 @@ fontSizeLG() {
 }
 
 getIP() {
-  // return "10.41.40.25";
-  return "192.168.25.93";
+  return "ec2-18-229-132-19.sa-east-1.compute.amazonaws.com";
 }

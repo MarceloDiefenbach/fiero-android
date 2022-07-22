@@ -85,8 +85,35 @@ mixin _$Controller on ControllerBase, Store {
     });
   }
 
+  late final _$quickChallengeAtom =
+      Atom(name: 'ControllerBase.quickChallenge', context: context);
+
+  @override
+  List<QuickChallenge> get quickChallenge {
+    _$quickChallengeAtom.reportRead();
+    return super.quickChallenge;
+  }
+
+  @override
+  set quickChallenge(List<QuickChallenge> value) {
+    _$quickChallengeAtom.reportWrite(value, super.quickChallenge, () {
+      super.quickChallenge = value;
+    });
+  }
+
   late final _$ControllerBaseActionController =
       ActionController(name: 'ControllerBase', context: context);
+
+  @override
+  dynamic addChallenge(QuickChallenge challenge) {
+    final _$actionInfo = _$ControllerBaseActionController.startAction(
+        name: 'ControllerBase.addChallenge');
+    try {
+      return super.addChallenge(challenge);
+    } finally {
+      _$ControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void saveUser(String nameP, String emailP, String passwordP) {
@@ -128,7 +155,8 @@ email: ${email},
 password: ${password},
 name: ${name},
 auth: ${auth},
-token: ${token}
+token: ${token},
+quickChallenge: ${quickChallenge}
     ''';
   }
 }

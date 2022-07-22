@@ -82,13 +82,13 @@ doAuth(String email, String password) async {
   var jsonData = jsonEncode(data);
 
   http.Response response;
-  print("1");
+  // print("1");
   response = await http.post(
     Uri.parse('http://${getIP()}:3333/user/login'),
     headers: {'Content-Type': 'application/json'},
     body: jsonData,
   );
-  print("2");
+  // print("2");
 
   Map<dynamic, dynamic> retorno = jsonDecode(response.body);
 
