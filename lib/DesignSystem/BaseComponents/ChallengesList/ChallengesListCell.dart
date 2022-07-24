@@ -1,14 +1,14 @@
-import 'package:fiero/DesignSystem/BaseComponents/ChallengeTypeComponent.dart';
+import 'package:fiero/Classes/QuickChallenge.dart';
+import 'package:fiero/DesignSystem/BaseComponents/ChallengesList/ChallengeTypeComponent.dart';
+import 'package:fiero/DesignSystem/BaseComponents/ChallengesList/ParticipantsNameText.dart';
 import 'package:fiero/DesignSystem/Tokens.dart';
 import 'package:flutter/material.dart';
 
 class ChallengesListCell extends StatefulWidget {
 
-  String title;
-  String subtitle;
-  String type;
+  QuickChallenge quickChallenge;
 
-  ChallengesListCell(this.title, this.subtitle, this.type);
+  ChallengesListCell(this.quickChallenge);
 
   @override
   State<ChallengesListCell> createState() => _ChallengesListCellState();
@@ -48,7 +48,7 @@ class _ChallengesListCellState extends State<ChallengesListCell> {
                   children: [
                     Flexible(
                       child: Text(
-                        "${widget.title}",
+                        "${widget.quickChallenge.name}",
                         style: TextStyle(
                             color: colorNeutralHighPure(),
                             fontWeight: FontWeight.bold,
@@ -63,20 +63,12 @@ class _ChallengesListCellState extends State<ChallengesListCell> {
                 Row(
                   children: [
                     Flexible(
-                      child: Text(
-                        "Participantes: ${widget.subtitle}",
-                        style: TextStyle(
-                            color: colorNeutralHighPure(),
-                            fontWeight: FontWeight.normal,
-                            fontSize: fontSizeXXS(),
-                            height: 1),
-                        textAlign: TextAlign.left,
-                      ),
+                      child: ParticipantsNameText(widget.quickChallenge),
                     ),
                   ],
                 ),
                 Padding(padding: EdgeInsets.only(top: spacingXXXS())),
-                ChallengeTypeComponent("MD5"),
+                ChallengeTypeComponent(widget.quickChallenge),
               ],
             ),
           ],

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 import 'package:fiero/DesignSystem/Tokens.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -100,4 +101,18 @@ doAuth(String email, String password) async {
     return retorno;
   }
   return "erro";
+}
+
+
+
+
+
+
+
+
+
+//extensions
+double double2Decimals(double val, int places){
+  num mod = pow(10.0, places);
+  return ((val * mod).round().toDouble() / mod);
 }

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:fiero/CreateAccount.dart';
-import 'package:fiero/Home.dart';
+import 'package:fiero/ChallengesList.dart';
 import 'package:fiero/controller.dart';
 import 'package:http/http.dart' as http;
 
@@ -132,7 +132,7 @@ class _LoginState extends State<Login> {
                                         child: TextField(
                                           scrollPadding: EdgeInsets.only(top:100),
                                           controller: _emailController,
-                                          keyboardType: TextInputType.text,
+                                          keyboardType: TextInputType.emailAddress,
                                           autofocus: false,
                                           onChanged: (String e) {},
                                           textInputAction: TextInputAction.done,
@@ -164,7 +164,7 @@ class _LoginState extends State<Login> {
                                           enableSuggestions: false,
                                           autocorrect: false,
                                           controller: _passwordController,
-                                          keyboardType: TextInputType.text,
+                                          keyboardType: TextInputType.visiblePassword,
                                           autofocus: false,
                                           onChanged: (String e) {},
                                           textInputAction: TextInputAction.done,

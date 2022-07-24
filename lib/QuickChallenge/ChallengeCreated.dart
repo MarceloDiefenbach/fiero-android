@@ -1,6 +1,6 @@
 import 'package:fiero/DesignSystem/BaseComponents/Button.dart';
 import 'package:fiero/DesignSystem/Tokens.dart';
-import 'package:fiero/Home.dart';
+import 'package:fiero/ChallengesList.dart';
 import 'package:flutter/material.dart';
 
 class ChallengeCreated extends StatefulWidget {
